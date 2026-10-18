@@ -1,0 +1,117 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #0A0806;
+  }
+
+  body {
+    background-color: #0A0806;
+    color: #F3E9D8;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  ::selection {
+    background: rgba(200, 162, 107, 0.35);
+    color: #FFF8EC;
+  }
+
+  :focus-visible {
+    outline: 1px solid #C8A26B;
+    outline-offset: 3px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0806;
+}
+::-webkit-scrollbar-thumb {
+  background: #3A2F24;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C8A26B;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em] text-gold;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-8 bg-gold/70;
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-gold px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-noir transition-all duration-500 hover:bg-gold-soft hover:shadow-[0_18px_40px_-12px_rgba(200,162,107,0.6)];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-3 rounded-full border border-cream/25 px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-cream transition-all duration-500 hover:border-gold hover:text-gold;
+  }
+
+  .field {
+    @apply w-full rounded-none border-0 border-b border-cream/20 bg-transparent px-0 py-3 text-[15px] text-cream placeholder:text-smoke/60 transition-colors focus:border-gold focus:outline-none focus:ring-0;
+  }
+}
+
+.text-gold-gradient {
+  background: linear-gradient(120deg, #F6E3BF 0%, #C8A26B 45%, #8C6A3C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+}
+
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(0.4);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .grain::after { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
